@@ -1,7 +1,7 @@
 FROM jupyter/all-spark-notebook:033056e6d164
 
 # last update: Sat Dec 29 13:50:00 EST 2018
-# p6steve 0.0.2
+# p6steve 0.0.2 +
 
 USER root
 
@@ -21,10 +21,10 @@ RUN apt-get update \
   && zef -v install https://github.com/bduggan/p6-jupyter-kernel.git@master \
   && zef -v install SVG::Plot --force-test \
   && zef -v install Math::Polygons --force-test \
-  && zef -v install https://github.com/p6steve/perl6-Physics-Measure.git@v0.0.2 \
-  && git clone https://github.com/p6steve/perl6-Physics-Measure-JupyterBinder.git \
-  && mv perl6-Physics-Measure-JupyterBinder/eg ${HOME} \
-  && rm -rf perl6-Physics-Measure-JupyterBinder \
+  && zef -v install https://github.com/p6steve/perl6-Physics-Measure.git \
+  && git clone https://github.com/p6steve/perl6-CollegePhysics.git \
+  && mv perl6-CollegePhysics/eg ${HOME} \
+  && rm -rf perl6-CollegePhysics \
   && chown -R $NB_UID ${HOME} \
   && fix-permissions ${HOME} \
   && jupyter-kernel.p6 --generate-config
@@ -32,4 +32,3 @@ RUN apt-get update \
 ENV PATH /usr/share/perl6/site/bin:$PATH
 
 USER ${NB_USER}
-
